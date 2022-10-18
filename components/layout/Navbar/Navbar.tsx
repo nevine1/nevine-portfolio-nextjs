@@ -4,17 +4,19 @@ import {navbarData} from './navbarData'
 import  Link from 'next/link';
 import {HiMenuAlt4, HiX} from 'react-icons/hi';
 import {motion} from 'framer-motion'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
 interface Props {
     
 }
 
 export default function Navbar({}: Props): ReactElement {
-    const[toggle, setToggle] = useState<boolean>(false)
+    const[clicked, setClicked] = useState<boolean>(false)
     console.log(navbarData)
     return (
         <Fragment>
             <nav className={`${styles.navbar} has-background-danger`}>
-                <ul className="container">
+                <ul className={`container ${clicked ? `${styles["nav-menu active"]}` : `${styles["nav-menu"]}` }`}>
                      {
                          navbarData.map((item, index) =>(
                             <li key={index}>
@@ -23,18 +25,15 @@ export default function Navbar({}: Props): ReactElement {
                          ))
                      }
                 </ul>
-                <div className={styles.nave_menu}>
-                    <HiMenuAlt4 onClick={() =>setToggle(true)}/>
-                    {
-                        toggle && (
-                            <motion.div
-                                whileInView={{x: [300, 0] }}
-                                transition={{duration: 0.85, ease:'easeOut'}}
-                                >
-                                <HiMenuAlt4 onClick={() =>setToggle(false)}/>
-                            </motion.div>
-                        )}
-                     
+                <div className={styles.nave_menu}  style={{cursor: "pointer"}} onClick={() => setClicked(!clicked)}>
+                    
+                   
+                     {
+                         clicked ? 
+                          <FontAwesomeIcon icon={faTimes} className={styles.icon}/> 
+                          :
+                          <FontAwesomeIcon icon={faBars} className={styles.icon} />
+                     }
                      
                 </div>
             </nav>
