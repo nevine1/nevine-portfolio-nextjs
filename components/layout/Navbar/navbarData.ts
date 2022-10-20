@@ -4,7 +4,7 @@ export const navbarData = [
         navText: 'Home'
     }, 
     {
-        navLink: 'about', //
+        navLink: '/about', //
         navText: 'About'
     }, 
     {
