@@ -30,27 +30,24 @@ export default function AboutSection({title, description, icon}: Props): ReactEl
     ]
     return (
         <>
-            <div className={styles.aboutContainer}>
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.3 }}
-                    animate={{ opacity: 1, scale: 1.3 }}
-                    transition={{ duration: 0.8 }}
-                >
-                    <h1 className={`title ${styles.aboutHeading}`}>Welcome to my <span className="has-text-danger">profile</span></h1>
+         <div className={styles.aboutMap}>
+            {
+              abouts.map((about, index) => (
+               <motion.div key={index}
+                    whileInView={{opacity: 1}}
+                    whileHover={{scale: 1.2}}
+                    transition={{ duration: 0.5, type: 'tween' }}
+                    >
+                    <div style={{margin: '20px', padding: '0 20px'}}>
+                        <FontAwesomeIcon icon={about.icon}/>
+                        <h3>{about.title}</h3>
+                        <p>{about.description}</p>
+                    </div>
                 </motion.div>
-                a
-                <div className={styles.aboutDetails}>
-                   {
-                       abouts.map((about, index) => (
-                           <div key={index}>
-                               <FontAwesomeIcon icon={about.icon}/>
-                               <h3>{about.title}</h3>
-                               <p>{about.description}</p>
-                           </div>
-                       ))
-                   } 
-                </div>
-            </div>
+                ))
+            } 
+         </div>
+            
         </>
     )
 }
